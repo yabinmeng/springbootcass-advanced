@@ -18,9 +18,35 @@ public class Hotel implements Serializable {
     private String address;
     private String zip;
 
+    /**
+     * Need the default, no-argument constructor in order
+     * for Spring Cassandra findXXX() functions to work
+     */
+    public Hotel() {
+    }
+
+    public Hotel(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Hotel(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
+    }
+
+    public Hotel(String name, String address, String zip) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.address = address;
+        this.zip = zip;
+    }
+
+    public Hotel(UUID id, String name, String address, String zip) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.zip = zip;
     }
 
     public UUID getId() {
@@ -50,5 +76,12 @@ public class Hotel implements Serializable {
     }
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "{ ID = %1$s, name = %2$s, address = %3$s, zip = %4s }",
+            getId(), getName(), getAddress(), getZip());
     }
 }

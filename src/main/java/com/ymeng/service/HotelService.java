@@ -5,7 +5,6 @@ import com.ymeng.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,7 +27,9 @@ public class HotelService {
         return hotelRepository.findAll();
     }
 
-    public void saveHotel(Hotel hotel) {
+    public void createHotel(Hotel hotel) {
         hotelRepository.insert(hotel);
     }
+
+    public void deleteAllHotels() { hotelRepository.deleteAll(); }
 }
