@@ -2,7 +2,7 @@ CREATE KEYSPACE IF NOT EXISTS testks WITH replication =
     {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
 
-CREATE TYPE IF NOT EXISTS testks.address_type (
+CREATE TYPE IF NOT EXISTS testks.CustAddrType (
     street text,
     city text,
     state text,
@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS testks.customer (
     id uuid,
     fname text,
     lname text,
-    address address_type,
+    phone varchar,
+    address CustAddrType,
     member_date date,
     primary key ((id))
 );
