@@ -26,3 +26,15 @@ CREATE TABLE IF NOT EXISTS testks.hotel (
     zip varchar,
     primary key((id))
 );
+
+CREATE TABLE IF NOT EXISTS testks.flight (
+    airline_code text,
+    flight_no text,
+    flight_date date,
+    seat_map_pic blob,
+    crew_names set<text>,
+    section_seats map<text, int>,
+    misc_notes tuple<varchar, text, float>,
+    primary key((airline_code,flight_no), flight_date)
+);
+

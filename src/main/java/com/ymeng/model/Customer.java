@@ -32,6 +32,10 @@ public class Customer implements Serializable {
 
     private LocalDate member_date;
 
+    public Customer() {
+
+    }
+
     public Customer(UUID id, String fname, String lame, String phone,
                     CustomerAddress address, LocalDate member_date) {
         this.id = id;
@@ -96,9 +100,9 @@ public class Customer implements Serializable {
         String memberDateStr = member_date.format(formatter);
 
         return String.format(
-            "{ id = %2$s, name = %3$s %4$s, phone = %5$s, birth_date = %6$s, " +
-                " address = %7$s, member_date = %8$s}",
-            getClass().getName(), getId(), getFirstName(), getLastName(),
+            "{ id = %1$s, name = %2$s %3$s, phone = %4$s," +
+                " address = %5$s, member_date = %6$s }",
+            getId(), getFirstName(), getLastName(),
             getPhone(), getAddress().toString(), memberDateStr);
     }
 }

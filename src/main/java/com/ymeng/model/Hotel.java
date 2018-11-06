@@ -81,7 +81,7 @@ public class Hotel implements Serializable {
     @Override
     public String toString() {
         return String.format(
-            "{ ID = %1$s, name = %2$s, address = %3$s, zip = %4s }",
+            "{ ID = %1$s, name = %2$s, address = %3$s, zip = %4$s }",
             getId(), getName(), getAddress(), getZip());
     }
 }

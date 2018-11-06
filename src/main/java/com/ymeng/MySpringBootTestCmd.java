@@ -1,21 +1,19 @@
 package com.ymeng;
 
-import com.ymeng.model.Customer;
-import com.ymeng.model.CustomerAddress;
-import com.ymeng.model.Hotel;
+import com.ymeng.model.*;
 import com.ymeng.service.CustomerService;
+import com.ymeng.service.FlightService;
 import com.ymeng.service.HotelService;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static java.lang.System.exit;
 import static java.lang.System.out;
@@ -28,6 +26,9 @@ public class MySpringBootTestCmd implements CommandLineRunner {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private FlightService flightService;
 
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(MySpringBootTestCmd.class);
@@ -42,7 +43,9 @@ public class MySpringBootTestCmd implements CommandLineRunner {
 
         //HotelTest();
 
-        CustomerTest();
+        //CustomerTest();
+
+        FlightTest();
 
         exit(0);
     }
@@ -102,5 +105,64 @@ public class MySpringBootTestCmd implements CommandLineRunner {
             custAddr, LocalDate.of(2011, 10, 5) );
 
         customerService.createCustomer(customer1);
+
+
+        out.println("\n=== Find a customer by ID ===");
+
+        Optional<Customer> foundCustomer = customerService.findCustomerByID(custId1);
+
+        if (foundCustomer.get() == null) {
+            out.println("Couldn't find hotel with ID: " + custId1.toString());
+        }
+        else {
+            out.println("Found customer: " + foundCustomer.get().toString());
+        }
+    }
+
+    public void FlightTest() {
+        out.println("\n=== Create a Flight ===");
+
+        FlightKey flightKey1 = new FlightKey(
+            "AA", "9013", LocalDate.now()
+        );
+
+        Flight flight1 = new Flight(flightKey1);
+
+        byte[] rndm_bytes = RandomUtils.nextBytes(32);
+        flight1.setSeatMapPic(ByteBuffer.wrap(rndm_bytes));
+
+        HashSet<String> names = new HashSet<>();
+        names.add("John Dowson");
+        names.add("Luis Bento");
+        names.add("Cool Guy");
+        flight1.setCrewNames(names);
+
+        HashMap<String, Integer> seatSections = new HashMap<>();
+        seatSections.put("President", 4);
+        seatSections.put("Business", 16);
+        seatSections.put("RegularA", 32);
+        seatSections.put("RegularB", 64);
+        flight1.setSectionSeats(seatSections);
+
+        FlightMiscNote miscNote =
+            new FlightMiscNote("Dallas", "Chicago", Float.valueOf(1875.0f));
+        flight1.setMiscNotes(miscNote);
+
+        flightService.createFlight(flight1);
+
+        out.println("\n=== Find a flight by key ===");
+
+        Optional<Flight> foundFlight = flightService.findFlightByKey(flightKey1);
+
+        if (foundFlight.get() == null) {
+            out.println("Couldn't find flight with key: " + flightKey1.toString());
+        }
+        else {
+            out.println("Found flight: " + foundFlight.get().toString());
+        }
+
+        //out.println("\n=== Delete a flight by key ===");
+
+        //flightService.deleteFlightByKey(flightKey1);
     }
 }
