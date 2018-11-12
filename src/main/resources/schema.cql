@@ -1,15 +1,15 @@
-CREATE KEYSPACE IF NOT EXISTS testks WITH replication =
+CREATE KEYSPACE IF NOT EXISTS springbootcass WITH replication =
     {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
 
-CREATE TYPE IF NOT EXISTS testks.CustAddrType (
+CREATE TYPE IF NOT EXISTS springbootcass.CustAddrType (
     street text,
     city text,
     state text,
     zipcode text
 );
 
-CREATE TABLE IF NOT EXISTS testks.customer (
+CREATE TABLE IF NOT EXISTS springbootcass.customer (
     id uuid,
     fname text,
     lname text,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS testks.customer (
     primary key ((id))
 );
 
-CREATE TABLE IF NOT EXISTS testks.hotel (
+CREATE TABLE IF NOT EXISTS springbootcass.hotel (
     id UUID,
     name varchar,
     address varchar,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS testks.hotel (
     primary key((id))
 );
 
-CREATE TABLE IF NOT EXISTS testks.flight (
+CREATE TABLE IF NOT EXISTS springbootcass.flight (
     airline_code text,
     flight_no text,
     flight_date date,

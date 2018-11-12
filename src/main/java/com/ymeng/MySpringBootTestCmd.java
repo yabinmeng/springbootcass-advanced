@@ -41,9 +41,9 @@ public class MySpringBootTestCmd implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        //HotelTest();
+        HotelTest();
 
-        //CustomerTest();
+        CustomerTest();
 
         FlightTest();
 
