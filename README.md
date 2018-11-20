@@ -18,19 +18,26 @@ This repository is **the second scenario of** a seriers of code templates(exampl
 Please **NOTE**:
 * For all scenarios, DataStax Enterprise (DSE) version 5.1.11 is used as the Cassandra database.
 
-* Among these scenarios, **the third one of using Spring Boot and DataStastx Enterprise Java Driver is the recommended approach**. The first 2 approaches, due to its usage with Spring Data for Cassandra, have some limititations that can't be easily addressed and may cause some issues (e.g. unnecessary tombstones) when interacting to Cassandra.
+* Among these scenarios, **the third one of using Spring Boot and DataStastx Enterprise Java Driver is the recommended approach**. The first 2 approaches, due to its usage with Spring Data for Cassandra, have some limititations that can't be easily addressed and may cause some issues (e.g. unnecessary tombstones) when interacting with Cassandra.
 
 ---
 
 # Scneario 2 Code Description
 
-The code project structure of this scenario is similar to that of the first scenario of this series except:
+The code project structure and Cassandra data acccess API of this scenario are similar to those of the first scenario of this series (of using Spring framework to access Cassandra data) except:
 
-1. Instead of exposing the data access capaibility to Cassandra through APIs, this scenario uses Spring Boot command line interface for testing purose. 
+1. Instead of exposing the data access capaibility to Cassandra through Rest APIs, this scenario uses Spring Boot command line interface for testing purose. 
 
 2. In this scenario, DSE user authentication is enabled. In order to connect to the DSE cluster correctly, Spring Boot "application.properties" file needs to have the following extra properties defined:
 ```
 spring.data.cassandra.username = <cassandra_username>
 spring.data.cassandra.password = <cassandra_password>
 ```
+3. This scenario deals with the following more complex Cassandra schema elements:
+* Composite primary key - multiple columns as the partition key and the clustering key
+* User defined type (UDT)
+* Collection data types (set and map)
+* Blob data type
+* Tuple data type
 
+All these complex elements are handled through Spring data object mapping, just like the basic entity object class.
