@@ -31,6 +31,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.datastax.dse/dse-java-driver-core
     //compile group: 'com.datastax.dse', name: 'dse-java-driver-core', version: '1.7.0'
+    
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
     compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
