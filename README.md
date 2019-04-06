@@ -1,3 +1,8 @@
+1. git clone https://github.com/yabinmeng/springbootcass-basic
+2. vi src/main/resources/application.properties
+3. cqlsh -f src/main/resources/schema.cql
+4. gradle bootRun
+
 # Overivew 
 This repository is **The second scenario of** a seriers of code templates(examples) to demonstrate how to use java Spring framework for data access (insert/update/delete/read) with Cassandra NoSQL database. This series contains the following scenarios:
 
